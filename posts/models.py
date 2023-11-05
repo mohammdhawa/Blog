@@ -43,8 +43,20 @@ class Post(models.Model):
         return self.title
 
 
+
 class Category(models.Model):
     name = models.CharField(max_length=100)
 
     def __str__(self):
         return self.name
+
+
+
+class Comment(models.Model):
+    post = models.ForeignKey(Post, related_name='post_comment', on_delete=models.CASCADE)
+    user = models.CharField(max_length=50)
+    content = models.TextField(max_length=2000)
+    created_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return str(self.post)
