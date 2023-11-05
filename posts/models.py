@@ -33,6 +33,7 @@ class Post(models.Model):
     publish_date = models.DateTimeField(auto_now=True)
 
     tags = TaggableManager()
+    image = models.ImageField(upload_to='post')
 
 
     def __str__(self) -> str:
