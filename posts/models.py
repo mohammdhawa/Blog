@@ -33,6 +33,7 @@ class Post(models.Model):
     draft = models.BooleanField(default=True)
     # publish_date = models.DateTimeField(default=timezone.now)
     publish_date = models.DateTimeField(auto_now=True)
+    category = models.ForeignKey('Category', related_name='post_category', on_delete=models.SET_NULL, null=True)
 
     tags = TaggableManager()
     image = models.ImageField(upload_to='post')
@@ -40,3 +41,10 @@ class Post(models.Model):
 
     def __str__(self) -> str:
         return self.title
+
+
+class Category(models.Model):
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
