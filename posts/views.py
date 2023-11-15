@@ -44,7 +44,9 @@ def create_post(request):
     if request.method == 'POST':
         form = PostForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
+            myform = form.save(commit=False)
+            myform.author = request.user
+            myform.save()
             return redirect('/posts/')
     else:
         form = PostForm()
@@ -52,3 +54,20 @@ def create_post(request):
     context = {'form': form}
     
     return render(request, 'posts/new.html', context)
+
+
+def edit_post(request, pk):
+    post = Post.objects.get(id=pk)
+    if request.method == 'POST':
+        form = PostForm(request.POST, request.FILES, instance=post)
+        if form.is_valid():
+            myform = form.save(commit=False)
+            myform.author = request.user
+            myform.save()
+            return redirect('/posts/')
+    else:
+        form = PostForm(instance=post)
+
+    context = {'form': form}
+    
+    return render(request, 'posts/edit.html', context)
