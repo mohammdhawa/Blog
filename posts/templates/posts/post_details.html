@@ -9,10 +9,14 @@
     
 
 
-{% for post in posts %}
-    <h3><a href="{% url 'post_detail' post.id %}">{{post}}</a></h3>
-{% endfor %}
+<h1>{{post}}</h1>
+<h3>{{post.author}}</h3>
+<h4>{{post.category}}</h4>
+<p>{{post.content}}</p>
+<img src="{{post.image.url}}">
+
+
     
- 
+
 </body>
 </html>
