@@ -79,3 +79,11 @@ def delete_post(request, pk):
     post.delete()
 
     return redirect('/posts/')
+
+
+from django.views.generic import UpdateView, CreateView, DeleteView
+
+class AddPost(CreateView):
+    model = Post
+    fields = '__all__'
+    success_url = '/posts/'
