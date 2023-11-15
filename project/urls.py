@@ -6,7 +6,8 @@ from django.conf.urls.static import static
 
 from posts.views import (PostList, PostDetail, 
                          create_post, edit_post, 
-                         delete_post, AddPost)
+                         delete_post, AddPost,
+                         EditPost,)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -17,7 +18,8 @@ urlpatterns = [
     path('posts/<int:pk>', PostDetail.as_view(), name='post_detail'),
     # path('posts/create/', create_post, name='create_post'),
     path('posts/create/', AddPost.as_view(), name='create_post'),
-    path('posts/<int:pk>/edit', edit_post, name='edit_post'),
+    # path('posts/<int:pk>/edit', edit_post, name='edit_post'),
+    path('posts/<int:pk>/edit', EditPost.as_view(), name='edit_post'),
     path('posts/<int:pk>/delete', delete_post, name='delete_post'),
 ]
 

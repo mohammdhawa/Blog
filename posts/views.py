@@ -87,3 +87,10 @@ class AddPost(CreateView):
     model = Post
     fields = '__all__'
     success_url = '/posts/'
+
+
+
+class EditPost(UpdateView):
+    model = Post
+    fields = '__all__'
+    success_url = '/posts/'
