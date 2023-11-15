@@ -7,7 +7,7 @@ from django.conf.urls.static import static
 from posts.views import (PostList, PostDetail, 
                          create_post, edit_post, 
                          delete_post, AddPost,
-                         EditPost,)
+                         EditPost, DeletePost)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -20,7 +20,8 @@ urlpatterns = [
     path('posts/create/', AddPost.as_view(), name='create_post'),
     # path('posts/<int:pk>/edit', edit_post, name='edit_post'),
     path('posts/<int:pk>/edit', EditPost.as_view(), name='edit_post'),
-    path('posts/<int:pk>/delete', delete_post, name='delete_post'),
+    # path('posts/<int:pk>/delete', delete_post, name='delete_post'),
+    path('posts/<int:pk>/delete', DeletePost.as_view(), name='delete_post'),
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
