@@ -8,6 +8,8 @@ from posts.views import ( create_post, edit_post,
                          delete_post, post_list, 
                          post_detail)
 
+from posts.api import post_list_api
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('summernote/', include('django_summernote.urls')),
@@ -21,6 +23,11 @@ urlpatterns = [
     # path('posts/<int:pk>/edit', EditPost.as_view(), name='edit_post'),
     path('posts/<int:pk>/delete', delete_post, name='delete_post'),
     # path('posts/<int:pk>/delete', DeletePost.as_view(), name='delete_post'),
+
+
+
+
+    path('posts/api', post_list_api, name='post_api'),
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
