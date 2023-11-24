@@ -3,23 +3,16 @@ from django.shortcuts import render, redirect
 # Create your views here.
 from .models import Post
 
-"""
-def post_list(request):                                     : query
+
+def post_list(request):                                     
     posts = Post.objects.all()                              
     
-    context = {                                             : context
-        'posts': posts, 
+    context = {                                             
+        'object_list': posts, 
                }
-    return render(request, 'posts/post_list.html', context) : template
-"""
-
-from django.views.generic import ListView
-
-class PostList(ListView):       # context: model_list / bject_list
-    model = Post                # template: model_action = post_list 
+    return render(request, 'posts/post_list.html', context) 
 
 
-"""
 def post_detail(request, pk):
     post = Post.objects.get(id=pk)
 
@@ -27,13 +20,10 @@ def post_detail(request, pk):
         'post': post
     }
 
-    return render(request, 'posts/post_details.html', context)
-"""
+    return render(request, 'posts/post_detail.html', context)
 
-from django.views.generic import DetailView
 
-class PostDetail(DetailView):           # context: post, object
-    model = Post                        # template: post_detail
+
 
 
 
@@ -76,27 +66,11 @@ def edit_post(request, pk):
 
 def delete_post(request, pk):
     post = Post.objects.get(id=pk)
-    post.delete()
 
-    return redirect('/posts/')
+    if request.method == 'POST':
+        post.delete()
+        return redirect('/posts/')
 
+    context = {'object': post}
+    return render(request, 'posts/post_confirm_delete.html', context)
 
-from django.views.generic import UpdateView, CreateView, DeleteView
-
-class AddPost(CreateView):
-    model = Post
-    fields = '__all__'
-    success_url = '/posts/'
-
-
-
-class EditPost(UpdateView):
-    model = Post
-    fields = '__all__'
-    success_url = '/posts/'
-
-
-
-class DeletePost(DeleteView):
-    model = Post
-    success_url = '/posts/'
