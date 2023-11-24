@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 
 # Create your views here.
-from .models import Post
+from .models import Post, Comment
 
 
 def post_list(request):                                     
@@ -13,11 +13,14 @@ def post_list(request):
     return render(request, 'posts/post_list.html', context) 
 
 
+
 def post_detail(request, pk):
     post = Post.objects.get(id=pk)
+    comments = Comment.objects.filter(post=post)
 
     context = {
-        'post': post
+        'post': post,
+        'comments': comments,
     }
 
     return render(request, 'posts/post_detail.html', context)
