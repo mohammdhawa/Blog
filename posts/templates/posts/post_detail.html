@@ -1,4 +1,6 @@
 {% extends 'posts/base.html' %}
+
+{% load django_bootstrap5 %}
     
 
 {% block content %}
@@ -30,10 +32,14 @@
             {% endfor %}
                
             <h4>Add Comment</h4>
-            <form action="" method='post'>
+            <form action="" method='post' class="form">
+
                 {% csrf_token %}
-                {{form.as_p}}
-                <input type='submit' value='Add Comment'>
+
+                {% bootstrap_form form %}
+
+                {% bootstrap_button button_type="submit" content="Add Comment" %}
+                
             </form>
             
         </ul>

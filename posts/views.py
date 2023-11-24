@@ -1,5 +1,4 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponseRedirect
 
 # Create your views here.
 from .models import Post, Comment
@@ -54,7 +53,7 @@ def create_post(request):
 
     context = {'form': form}
     
-    return render(request, 'posts/new.html', context)
+    return render(request, 'posts/post_form.html', context)
 
 
 def edit_post(request, pk):
@@ -71,7 +70,7 @@ def edit_post(request, pk):
 
     context = {'form': form}
     
-    return render(request, 'posts/edit.html', context)
+    return render(request, 'posts/post_form.html', context)
 
 
 
