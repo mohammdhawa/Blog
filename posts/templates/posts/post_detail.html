@@ -1,22 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+{% extends 'posts/base.html' %}
     
 
+{% block content %}
+    
 
-<h1>{{post}}</h1>
-<h3>{{post.author}}</h3>
-<h4>{{post.category}}</h4>
-<p>{{post.content|safe}}</p>
-<img src="{{post.image.url}}">
+    <div>
+        <h1>{{post}}</h1>
+        <h3>{{post.author}}</h3>
+        <h4>{{post.category}}</h4>
+        <p>{{post.content|safe}}</p>
+        <img src="{{post.image.url}}">
+    </div>
+    <hr>
+    <div>
+        <h4>Comments</h4>
+    </div>
 
 
     
 
-</body>
-</html>
+{% endblock content %}
