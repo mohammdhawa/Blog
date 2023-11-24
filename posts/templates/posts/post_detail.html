@@ -13,8 +13,7 @@
     </div>
     <hr>
     <div>
-        <h4>Comments</h4>
-
+        <h4>Comments({{comments|length}})</h4>
         <ul>
             
             {% for comment in comments %}
@@ -24,8 +23,18 @@
                     {{comment.created_at}}
                 </div>
             </li>
+            {% empty %}
+             <li>
+                There are no comment on this post
+             </li>
             {% endfor %}
-                
+               
+            <h4>Add Comment</h4>
+            <form action="" method='post'>
+                {% csrf_token %}
+                {{form.as_p}}
+                <input type='submit' value='Add Comment'>
+            </form>
             
         </ul>
     </div>

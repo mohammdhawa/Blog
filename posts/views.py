@@ -1,7 +1,10 @@
 from django.shortcuts import render, redirect
+from django.http import HttpResponseRedirect
 
 # Create your views here.
 from .models import Post, Comment
+
+from .forms import PostForm, CommentForm
 
 
 def post_list(request):                                     
@@ -18,19 +21,24 @@ def post_detail(request, pk):
     post = Post.objects.get(id=pk)
     comments = Comment.objects.filter(post=post)
 
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            myform = form.save(commit=False)
+            myform.post = post
+            myform.save()
+    else:
+        form = CommentForm()
+
     context = {
         'post': post,
         'comments': comments,
+        'form': form,
     }
 
     return render(request, 'posts/post_detail.html', context)
 
 
-
-
-
-
-from .forms import PostForm
 
 def create_post(request):
     
@@ -77,3 +85,9 @@ def delete_post(request, pk):
     context = {'object': post}
     return render(request, 'posts/post_confirm_delete.html', context)
 
+
+
+
+
+
+    
