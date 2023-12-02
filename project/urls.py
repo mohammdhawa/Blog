@@ -8,7 +8,7 @@ from posts.views import ( create_post, edit_post,
                          delete_post, post_list, 
                          post_detail)
 
-from posts.api import PostListAPI, post_detail_api
+from posts.api import PostListAPI, PostDetailAPI
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -28,7 +28,7 @@ urlpatterns = [
 
 
     path('posts/api', PostListAPI.as_view(), name='post_api'),
-    path('posts/api/<int:id>/', post_detail_api, name='api_detail'),
+    path('posts/api/<int:pk>/', PostDetailAPI.as_view(), name='api_detail'),
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

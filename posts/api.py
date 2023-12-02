@@ -31,3 +31,9 @@ from rest_framework import generics
 class PostListAPI(generics.ListAPIView):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
+
+
+
+class PostDetailAPI(generics.RetrieveAPIView):
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
