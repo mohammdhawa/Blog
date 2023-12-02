@@ -22,3 +22,12 @@ def post_detail_api(request, id):
     data = PostSerializer(post).data
 
     return Response({'data': data})
+
+
+
+from rest_framework import generics
+
+
+class PostListAPI(generics.ListAPIView):
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
